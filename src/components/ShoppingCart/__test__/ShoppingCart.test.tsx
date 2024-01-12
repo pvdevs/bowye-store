@@ -3,7 +3,6 @@ import { expect, describe, it, vi } from 'vitest';
 import { userEvent } from '@testing-library/user-event';
 import ShoppingCart from '../ShoppingCart';
 import Product from '../../ProductsList/Product';
-import ProductsList from '../../ProductsList/ProductsList';
 import { useState } from 'react';
 
 const MockSingleProduct: Product[] = [
@@ -108,7 +107,7 @@ describe('Items counter on top of cart', () => {
   });
 });
 
-describe('Single product changes on list', () => {
+describe('Products list changes', () => {
   it('should increase items counter of own product when its quantity changes', async () => {
     const user = userEvent.setup();
 
@@ -140,5 +139,20 @@ describe('Order summary', () => {
 
     const cartTotalPrice = screen.getByTestId('mock-cart-total-price');
     expect(cartTotalPrice).toHaveTextContent('TOTAL COST: 61');
+  });
+
+  it('should update counter when a item is removed with quantity', async () => {
+    const user = userEvent.setup();
+
+    render(<MockCartMultiple />);
+    const cartItemCounter = screen.getByTestId('mock-cart-item-counter');
+    const [incrementBtn] = screen.queryAllByTestId('mock-increment-btn');
+    const [removeButton] = screen.queryAllByRole('button', { name: 'Remove' });
+    // It was 2 items
+    await user.click(incrementBtn);
+    // Now are 3 items
+    await user.click(removeButton);
+    // Now it should be 1
+    expect(cartItemCounter).toHaveTextContent('1 Item');
   });
 });

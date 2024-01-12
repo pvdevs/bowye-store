@@ -49,6 +49,14 @@ export const CartItem = ({
     incrementQuantity();
   };
 
+  const handleRemoveBtn = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+
+    setItems(items.filter((item) => item.id !== currentProductId));
+  };
+
   if (!currentProduct) {
     return <span>Error: No product was find</span>;
   }
@@ -62,7 +70,7 @@ export const CartItem = ({
           <div>
             <span>{currentProduct.title}</span>
             <span>{currentProduct.title}</span>
-            <button>Remove</button>
+            <button onClick={(e) => handleRemoveBtn(e)}>Remove</button>
           </div>
         </div>
       </td>

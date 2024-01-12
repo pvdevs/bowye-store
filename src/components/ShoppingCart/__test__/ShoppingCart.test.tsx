@@ -63,8 +63,7 @@ describe('Items counter on top of cart', () => {
     render(<ShoppingCart items={MockMultipleProducts} setItems={vi.fn()} />);
 
     const itemsCounter = screen.getByTestId('mock-cart-item-counter');
-    screen.debug();
-    expect(itemsCounter).toEqual(`${MockMultipleProducts.length} Items`);
+    expect(itemsCounter).toHaveTextContent('2 Items');
   });
 
   it('should increase when a product quantity changes', async () => {
@@ -72,11 +71,11 @@ describe('Items counter on top of cart', () => {
 
     render(<ShoppingCart items={MockSingleProduct} setItems={vi.fn()} />);
     const itemsCounter = screen.getByTestId('mock-cart-item-counter');
-    const incrementBtn = screen.getByTestId('mock-increment-btn');
+    const [incrementBtn] = screen.queryAllByTestId('mock-increment-btn');
 
     await user.click(incrementBtn);
 
-    expect(itemsCounter).toEqual('2 Items');
+    expect(itemsCounter).toHaveTextContent(/2 Items/i);
   });
 
   it('should equal the quantity of multiple different items with multiple quantities ', async () => {

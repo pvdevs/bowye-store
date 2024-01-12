@@ -12,6 +12,15 @@ interface ShoppingCartProps {
 export default function ShoppingCart({ items, setItems }: ShoppingCartProps) {
   //
 
+  const totalOfItems = () => {
+    let totalItems = 0;
+    items.map((item) => {
+      totalItems += item.productQuantity.quantity;
+    });
+
+    return totalItems;
+  };
+
   return (
     <div className="shopping-cart">
       <button className="return-button">← Continue Shopping</button>
@@ -21,7 +30,7 @@ export default function ShoppingCart({ items, setItems }: ShoppingCartProps) {
           className="cart-items-counter"
           data-testid="mock-cart-item-counter"
         >
-          {items.length} Items
+          {`${totalOfItems()} Items`}
         </span>
       </div>
 
@@ -37,7 +46,9 @@ export default function ShoppingCart({ items, setItems }: ShoppingCartProps) {
           </tr>
         </thead>
         <tbody>
-          <CartItem product={items[0]} />
+          {items.map((item) => {
+            return <CartItem product={item} key={item.id} />;
+          })}
         </tbody>
       </table>
     </div>

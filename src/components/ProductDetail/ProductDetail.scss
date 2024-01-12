@@ -1,0 +1,36 @@
+.product-details {
+  width: 100vw;
+  display: grid;
+  grid-template-columns: 45% 55%;
+
+  img {
+    width: 100%;
+  }
+
+  .product-details-infos {
+    padding: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    text-align: start;
+
+    .details-title-rate {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: start;
+      span {
+        font-size: 14px;
+        color: rgba($color: #000000, $alpha: 0.6);
+      }
+    }
+
+    button {
+      font-size: 18px;
+      color: white;
+      background-color: #0e0e0e;
+      border: none;
+      padding: 16px 32px;
+    }
+  }
+}

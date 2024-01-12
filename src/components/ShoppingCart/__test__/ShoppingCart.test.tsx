@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { expect, describe, it, vi } from 'vitest';
+import { expect, describe, it } from 'vitest';
 import { userEvent } from '@testing-library/user-event';
 import ShoppingCart from '../ShoppingCart';
 import Product from '../../ProductsList/Product';

@@ -28,7 +28,7 @@ export default function ShoppingCart({
         </span>
       </div>
 
-      <div className="vertical-line"></div>
+      <div className="horizontal-line"></div>
 
       <table>
         <thead>
@@ -52,7 +52,7 @@ export default function ShoppingCart({
           })}
         </tbody>
       </table>
-      <div className="vertical-line"></div>
+      <div className="horizontal-line"></div>
 
       <div className="order-summary">
         <h1>Order Summary</h1>

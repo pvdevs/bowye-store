@@ -3,6 +3,7 @@ import './App.scss';
 import ShoppingCart from './components/ShoppingCart/ShoppingCart';
 import Product from './components/ProductsList/Product';
 import { useState } from 'react';
+import { ProductDetail } from './components/ProductDetail/ProductDetail';
 
 export default function App() {
   const initialItemsMock: Product[] = [
@@ -37,9 +38,13 @@ export default function App() {
   const [items, setItems] = useState(initialItemsMock);
   const totalItems = items.reduce((acc, cur) => acc + cur.quantity, 0);
 
+  /*
   return (
     <div>
       <ShoppingCart items={items} setItems={setItems} totalItems={totalItems} />
     </div>
   );
+  */
+
+  return <ProductDetail />;
 }

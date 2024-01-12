@@ -136,21 +136,9 @@ describe('Single product changes on list', () => {
 
 describe('Order summary', () => {
   it('should sum total cost of all items on order summary total', async () => {
-    render(<ShoppingCart items={MockMultipleProducts} setItems={vi.fn()} />);
+    render(<MockCartMultiple />);
 
-    const cartTotalPrice = screen.getByTestId('mock-cart-total-price'); // For this to work i should have more than 1 product on the cart
-    const productMockTotalPrice = screen.queryAllByTestId(
-      'mock-item-total-price'
-    );
-
-    let currentTotalPrice: number = 0;
-    for (let i = 0; i < productMockTotalPrice.length; i++) {
-      const str = productMockTotalPrice[i].textContent;
-      const numericValue = parseFloat(str.replace(/[^0-9.-]+/g, ''));
-
-      currentTotalPrice += numericValue;
-    }
-
-    expect(cartTotalPrice).toEqual(currentTotalPrice);
+    const cartTotalPrice = screen.getByTestId('mock-cart-total-price');
+    expect(cartTotalPrice).toHaveTextContent('TOTAL COST: 61');
   });
 });

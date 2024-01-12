@@ -10,7 +10,10 @@ export default function ShoppingCart({
 }: ProductsList) {
   //
 
-  //const totalCost = items.reduce(); Parei no total cost
+  const totalCost = items.reduce(
+    (acc, curr) => acc + curr.quantity * curr.price,
+    0
+  );
 
   return (
     <div className="shopping-cart">
@@ -53,7 +56,12 @@ export default function ShoppingCart({
 
       <div className="order-summary">
         <h1>Order Summary</h1>
-        <span className="total-order-cost">TOTAL COST: {totalCost}</span>
+        <span
+          className="total-order-cost"
+          data-testid={'mock-cart-total-price'}
+        >
+          TOTAL COST: {totalCost}
+        </span>
       </div>
     </div>
   );

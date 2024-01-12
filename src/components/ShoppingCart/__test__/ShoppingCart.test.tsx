@@ -3,6 +3,8 @@ import { expect, describe, it, vi } from 'vitest';
 import { userEvent } from '@testing-library/user-event';
 import ShoppingCart from '../ShoppingCart';
 import Product from '../../ProductsList/Product';
+import ProductsList from '../../ProductsList/ProductsList';
+import { useState } from 'react';
 
 const MockSingleProduct: Product[] = [
   {
@@ -10,16 +12,13 @@ const MockSingleProduct: Product[] = [
     title: 'MockTitle',
     id: 2,
     category: 'MockCategory',
+    description: 'blabla',
     price: 20.5,
     rating: {
       rate: 4.1,
       count: 200,
     },
-    productQuantity: {
-      quantity: 1,
-      decrementQuantity: vi.fn(),
-      incrementQuantity: vi.fn(),
-    },
+    quantity: 1,
   },
 ];
 
@@ -29,38 +28,49 @@ const MockMultipleProducts: Product[] = [
     title: 'MockTitle',
     id: 2,
     category: 'MockCategory',
+    description: 'blabla',
     price: 20.5,
     rating: {
       rate: 4.1,
       count: 200,
     },
-    productQuantity: {
-      quantity: 1,
-      decrementQuantity: vi.fn(),
-      incrementQuantity: vi.fn(),
-    },
+    quantity: 1,
   },
   {
     cover: '',
-    title: 'MockTitle2',
-    id: 3,
-    category: 'MockCategory2',
+    title: 'MockTitle22',
+    id: 30,
+    category: 'MockCategory22',
+    description: 'blabla22',
     price: 40.5,
     rating: {
-      rate: 4.1,
-      count: 200,
+      rate: 4.6,
+      count: 300,
     },
-    productQuantity: {
-      quantity: 1,
-      decrementQuantity: vi.fn(),
-      incrementQuantity: vi.fn(),
-    },
+    quantity: 1,
   },
 ];
 
+const MockCartSingle = () => {
+  const [items, setItems] = useState(MockSingleProduct);
+  const totalItems = items.reduce((acc, cur) => acc + cur.quantity, 0);
+  return (
+    <ShoppingCart items={items} setItems={setItems} totalItems={totalItems} />
+  );
+};
+
+const MockCartMultiple = () => {
+  const [items, setItems] = useState(MockMultipleProducts);
+  const totalItems = items.reduce((acc, cur) => acc + cur.quantity, 0);
+
+  return (
+    <ShoppingCart items={items} setItems={setItems} totalItems={totalItems} />
+  );
+};
+
 describe('Items counter on top of cart', () => {
   it('should equal the quantity of multiple different items ', async () => {
-    render(<ShoppingCart items={MockMultipleProducts} setItems={vi.fn()} />);
+    render(<MockCartMultiple />);
 
     const itemsCounter = screen.getByTestId('mock-cart-item-counter');
     expect(itemsCounter).toHaveTextContent('2 Items');
@@ -69,9 +79,9 @@ describe('Items counter on top of cart', () => {
   it('should increase when a product quantity changes', async () => {
     const user = userEvent.setup();
 
-    render(<ShoppingCart items={MockSingleProduct} setItems={vi.fn()} />);
+    render(<MockCartSingle />);
     const itemsCounter = screen.getByTestId('mock-cart-item-counter');
-    const [incrementBtn] = screen.queryAllByTestId('mock-increment-btn');
+    const incrementBtn = screen.getByTestId('mock-increment-btn');
 
     await user.click(incrementBtn);
 
@@ -81,18 +91,20 @@ describe('Items counter on top of cart', () => {
   it('should equal the quantity of multiple different items with multiple quantities ', async () => {
     const user = userEvent.setup();
 
-    render(<ShoppingCart items={MockMultipleProducts} setItems={vi.fn()} />);
+    render(<MockCartMultiple />);
     const itemsCounter = screen.getByTestId('mock-cart-item-counter');
-    const [itemCounter] = screen.queryAllByTestId('mock-product-item-counter');
     const [incrementBtn] = screen.queryAllByTestId('mock-increment-btn');
 
     await user.click(incrementBtn);
 
-    const updatedItemCounter = Number(itemCounter.textContent);
+    expect(itemsCounter).toHaveTextContent(/3 Items/i);
+  });
 
-    expect(itemsCounter).toEqual(
-      `${MockMultipleProducts.length + updatedItemCounter} Items`
-    );
+  it('should display "item" when its only 1', async () => {
+    render(<MockCartSingle />);
+    const itemsCounter = screen.getByTestId('mock-cart-item-counter');
+
+    expect(itemsCounter).toHaveTextContent(/1 Item/i);
   });
 });
 
@@ -100,27 +112,25 @@ describe('Single product changes on list', () => {
   it('should increase items counter of own product when its quantity changes', async () => {
     const user = userEvent.setup();
 
-    render(<ShoppingCart items={MockSingleProduct} setItems={vi.fn()} />);
+    render(<MockCartSingle />);
     const itemCounter = screen.getByTestId('mock-product-item-counter');
     const incrementBtn = screen.getByTestId('mock-increment-btn');
 
     await user.click(incrementBtn);
 
-    expect(itemCounter).toEqual(2);
+    expect(itemCounter).toHaveTextContent('2');
   });
 
   it('should increase total price of own product when its quantity changes', async () => {
     const user = userEvent.setup();
 
-    render(<ShoppingCart items={MockSingleProduct} setItems={vi.fn()} />);
+    render(<MockCartSingle />);
     const incrementBtn = screen.getByTestId('mock-increment-btn');
-    const itemTotalPrice = screen.getByTestId('mock-item-total-price');
-
     await user.click(incrementBtn);
-
     const newItemTotalPrice = screen.getByTestId('mock-item-total-price');
 
-    expect(newItemTotalPrice).not.toBe(itemTotalPrice);
+    screen.debug();
+    expect(newItemTotalPrice).not.toHaveTextContent('20.5'); // this is the unitary price
   });
 });
 

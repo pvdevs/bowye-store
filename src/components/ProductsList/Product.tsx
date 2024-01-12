@@ -3,18 +3,11 @@ export default interface Product {
   title: string;
   id: number;
   category: string;
+  description: string;
   price: number;
   rating: {
     rate: number;
     count: number;
   };
-  productQuantity: {
-    quantity: number;
-    decrementQuantity: (
-      e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-    ) => void;
-    incrementQuantity: (
-      e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-    ) => void;
-  };
+  quantity: number;
 }

@@ -1,25 +1,16 @@
-import React, { useState } from 'react';
-import Product from '../ProductsList/Product';
 import './ShoppingCart.scss';
-import { v4 as uuid } from 'uuid';
 import { CartItem } from './CartItem';
+import ProductsList from '../ProductsList/ProductsList';
 
-interface ShoppingCartProps {
-  items: Product[];
-  setItems: React.Dispatch<React.SetStateAction<Product[]>>;
-}
-
-export default function ShoppingCart({ items, setItems }: ShoppingCartProps) {
+// Remember that these states are just props, so we'll handle them in App.tsx
+export default function ShoppingCart({
+  items,
+  setItems,
+  totalItems,
+}: ProductsList) {
   //
 
-  const totalOfItems = () => {
-    let totalItems = 0;
-    items.map((item) => {
-      totalItems += item.productQuantity.quantity;
-    });
-
-    return totalItems;
-  };
+  //const totalCost = items.reduce(); Parei no total cost
 
   return (
     <div className="shopping-cart">
@@ -30,7 +21,7 @@ export default function ShoppingCart({ items, setItems }: ShoppingCartProps) {
           className="cart-items-counter"
           data-testid="mock-cart-item-counter"
         >
-          {`${totalOfItems()} Items`}
+          {totalItems === 1 ? `${totalItems} Item` : `${totalItems} Items`}
         </span>
       </div>
 
@@ -47,10 +38,23 @@ export default function ShoppingCart({ items, setItems }: ShoppingCartProps) {
         </thead>
         <tbody>
           {items.map((item) => {
-            return <CartItem product={item} key={item.id} />;
+            return (
+              <CartItem
+                items={items}
+                setItems={setItems}
+                currentProductId={item.id}
+                key={item.id}
+              />
+            );
           })}
         </tbody>
       </table>
+      <div className="vertical-line"></div>
+
+      <div className="order-summary">
+        <h1>Order Summary</h1>
+        <span className="total-order-cost">TOTAL COST: {totalCost}</span>
+      </div>
     </div>
   );
 }

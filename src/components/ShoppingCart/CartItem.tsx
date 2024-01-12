@@ -1,20 +1,67 @@
 //import React from 'react';
-import Product from '../ProductsList/Product';
+import ProductsList from '../ProductsList/ProductsList';
 
-interface Prop {
-  product: Product;
-}
+export const CartItem = ({
+  items,
+  setItems,
+  currentProductId,
+}: ProductsList) => {
+  const currentProduct = items.find((item) => item.id === currentProductId);
 
-export const CartItem = ({ product }: Prop) => {
+  const decrementQuantity = () => {
+    setItems(
+      items.map((item) => {
+        if (item.id === currentProductId) {
+          if (item.quantity === 1) return item;
+          return { ...item, quantity: item.quantity - 1 };
+        } else {
+          return item;
+        }
+      })
+    );
+  };
+
+  const incrementQuantity = () => {
+    setItems(
+      items.map((item) => {
+        if (item.id === currentProductId) {
+          return { ...item, quantity: item.quantity + 1 };
+        } else {
+          return item;
+        }
+      })
+    );
+  };
+
+  const handleDecrementBtn = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+
+    decrementQuantity();
+  };
+
+  const handleIncrementBtn = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+
+    incrementQuantity();
+  };
+
+  if (!currentProduct) {
+    return <span>Error: No product was find</span>;
+  }
+
   return (
     <tr className="cart-item-row">
       <td>
         <div className="product-details-cart">
-          <img src={product.title} alt="" />
+          <img src={currentProduct.title} alt="" />
 
           <div>
-            <span>{product.title}</span>
-            <span>{product.title}</span>
+            <span>{currentProduct.title}</span>
+            <span>{currentProduct.title}</span>
             <button>Remove</button>
           </div>
         </div>
@@ -24,7 +71,7 @@ export const CartItem = ({ product }: Prop) => {
           <div className="minus-plus-button-container">
             <button
               className="decrement-button"
-              onClick={(e) => product.productQuantity.decrementQuantity(e)}
+              onClick={(e) => handleDecrementBtn(e)}
             >
               -
             </button>
@@ -32,12 +79,12 @@ export const CartItem = ({ product }: Prop) => {
               className="item-quantity"
               data-testid="mock-product-item-counter"
             >
-              {product.productQuantity.quantity}
+              {currentProduct.quantity}
             </div>
             <button
               className="increment-button"
               data-testid="mock-increment-btn"
-              onClick={product.productQuantity.incrementQuantity}
+              onClick={(e) => handleIncrementBtn(e)}
             >
               +
             </button>
@@ -45,10 +92,12 @@ export const CartItem = ({ product }: Prop) => {
         </div>
       </td>
       <td>
-        <span>{product.price}</span>
+        <span>{currentProduct.price}</span>
       </td>
       <td>
-        <span>{product.price * product.productQuantity.quantity}</span>
+        <span data-testid="mock-item-total-price">
+          {currentProduct.price * currentProduct.quantity}
+        </span>
       </td>
     </tr>
   );

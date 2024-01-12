@@ -18,7 +18,7 @@ export default function App() {
         rate: 4.1,
         count: 200,
       },
-      quantity: 1,
+      quantity: 4,
     },
     {
       cover: '',
@@ -35,7 +35,21 @@ export default function App() {
     },
   ];
 
-  const [items, setItems] = useState(initialItemsMock);
+  const mockItem: Product = {
+    cover: '',
+    title: 'MockTitle',
+    id: 2,
+    category: 'MockCategory',
+    description: 'blabla',
+    price: 20.5,
+    rating: {
+      rate: 4.1,
+      count: 200,
+    },
+    quantity: 1,
+  };
+
+  const [items, setItems] = useState<Product[]>(initialItemsMock);
   const totalItems = items.reduce((acc, cur) => acc + cur.quantity, 0);
 
   /*
@@ -46,5 +60,12 @@ export default function App() {
   );
   */
 
-  return <ProductDetail />;
+  return (
+    <ProductDetail
+      items={items}
+      setItems={setItems}
+      totalItems={totalItems}
+      currentProduct={mockItem}
+    />
+  );
 }

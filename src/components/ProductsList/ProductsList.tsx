@@ -5,4 +5,5 @@ export default interface ProductsList {
   setItems: React.Dispatch<React.SetStateAction<Product[]>>;
   totalItems?: number;
   currentProductId?: number;
+  currentProduct?: Product;
 }

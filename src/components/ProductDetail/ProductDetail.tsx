@@ -1,7 +1,14 @@
 import React from 'react';
 import './ProductDetail.scss';
+import ProductsList from '../ProductsList/ProductsList';
 
-export const ProductDetail = () => {
+export const ProductDetail = ({
+  items,
+  setItems,
+  totalItems,
+  currentProduct,
+}: ProductsList) => {
+  const listHasProduct = items.find((item) => item.id === currentProduct.id);
   return (
     <div className="product-details">
       <img src="aasf" alt="" />
@@ -17,10 +24,14 @@ export const ProductDetail = () => {
           and a great fit for casual fashion wear and diehard baseball fans. The
           Henley style round neckline includes a three-button placket.
         </p>
-        <span>Category</span>
+        <span>{currentProduct?.category}</span>
         <div className="horizontal-line"></div>
         <div className="cta">
-          <button>Add to your cart - $24</button>
+          {listHasProduct ? (
+            <p>existo {listHasProduct.quantity}</p>
+          ) : (
+            <button>Add to your cart - ${currentProduct?.price}</button>
+          )}
         </div>
       </div>
     </div>

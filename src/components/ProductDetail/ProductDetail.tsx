@@ -9,6 +9,48 @@ export const ProductDetail = ({
   currentProduct,
 }: ProductsList) => {
   const listHasProduct = items.find((item) => item.id === currentProduct.id);
+
+  const decrementQuantity = () => {
+    setItems(
+      items.map((item) => {
+        if (item.id === currentProduct?.id) {
+          if (item.quantity === 1) return item;
+          return { ...item, quantity: item.quantity - 1 };
+        } else {
+          return item;
+        }
+      })
+    );
+  };
+
+  const incrementQuantity = () => {
+    setItems(
+      items.map((item) => {
+        if (item.id === currentProduct?.id) {
+          return { ...item, quantity: item.quantity + 1 };
+        } else {
+          return item;
+        }
+      })
+    );
+  };
+
+  const handleDecrementBtn = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+
+    decrementQuantity();
+  };
+
+  const handleIncrementBtn = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+
+    incrementQuantity();
+  };
+
   return (
     <div className="product-details">
       <img src="aasf" alt="" />
@@ -28,7 +70,16 @@ export const ProductDetail = ({
         <div className="horizontal-line"></div>
         <div className="cta">
           {listHasProduct ? (
-            <p>existo {listHasProduct.quantity}</p>
+            <div
+              className="minus-plus-buttons"
+              data-testid="mock-minusplus-field"
+            >
+              <button onClick={(e) => handleDecrementBtn(e)}>-</button>
+              <span data-testid="mock-product-quantity">
+                {listHasProduct.quantity}
+              </span>
+              <button onClick={(e) => handleIncrementBtn(e)}>+</button>
+            </div>
           ) : (
             <button>Add to your cart - ${currentProduct?.price}</button>
           )}

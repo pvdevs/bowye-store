@@ -1,13 +1,12 @@
 import { render, screen } from '@testing-library/react';
 import { expect, describe, it } from 'vitest';
 import { userEvent } from '@testing-library/user-event';
-import ShoppingCart from '../../ShoppingCart/ShoppingCart';
 import Product from '../../ProductsList/Product';
 import { useState } from 'react';
 import { ProductDetail } from '../ProductDetail';
 
 const newProduct: Product = {
-  cover: '',
+  image: '',
   title: 'MockTitle',
   id: 52,
   category: 'MockCategory',
@@ -21,7 +20,7 @@ const newProduct: Product = {
 };
 
 const existingProduct: Product = {
-  cover: '',
+  image: '',
   title: 'MockTitle',
   id: 2,
   category: 'MockCategory',
@@ -36,7 +35,7 @@ const existingProduct: Product = {
 
 const existingProducts: Product[] = [
   {
-    cover: '',
+    image: '',
     title: 'MockTitle',
     id: 2,
     category: 'MockCategory',
@@ -49,7 +48,7 @@ const existingProducts: Product[] = [
     quantity: 4,
   },
   {
-    cover: '',
+    image: '',
     title: 'MockTitle22',
     id: 30,
     category: 'MockCategory22',
@@ -82,24 +81,6 @@ const MockAlredyAdd = () => {
       setItems={setItems}
       currentProduct={existingProduct}
     />
-  );
-};
-
-const MockEmptyCart = () => {
-  const [items, setItems] = useState<Product[]>([] as Product[]);
-  const totalItems = items.reduce((acc, cur) => acc + cur.quantity, 0);
-
-  return (
-    <ProductDetail items={items} setItems={setItems} totalItems={totalItems} />
-  );
-};
-
-const MockCartMultiple = () => {
-  const [items, setItems] = useState(MockMultipleProducts);
-  const totalItems = items.reduce((acc, cur) => acc + cur.quantity, 0);
-
-  return (
-    <ShoppingCart items={items} setItems={setItems} totalItems={totalItems} />
   );
 };
 

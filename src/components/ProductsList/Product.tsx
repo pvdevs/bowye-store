@@ -1,5 +1,5 @@
 export default interface Product {
-  cover: string;
+  image: string;
   title: string;
   id: number;
   category: string;
@@ -9,5 +9,5 @@ export default interface Product {
     rate: number;
     count: number;
   };
-  quantity: number;
+  quantity?: number;
 }

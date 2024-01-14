@@ -4,6 +4,7 @@ import ShoppingCart from './components/ShoppingCart/ShoppingCart';
 import Product from './components/ProductsList/Product';
 import { useState } from 'react';
 import { ProductDetail } from './components/ProductDetail/ProductDetail';
+import { AllProducts } from './components/AllProducts/AllProducts';
 
 export default function App() {
   const initialItemsMock: Product[] = [
@@ -52,14 +53,23 @@ export default function App() {
   const [items, setItems] = useState<Product[]>(initialItemsMock);
   const totalItems = items.reduce((acc, cur) => acc + cur.quantity, 0);
 
-  /*
+  //All Products
   return (
-    <div>
-      <ShoppingCart items={items} setItems={setItems} totalItems={totalItems} />
+    <div className="shop">
+      <AllProducts />
     </div>
   );
-  */
 
+  // //Shopping Cart
+
+  // return (
+  //   <div>
+  //     <ShoppingCart items={items} setItems={setItems} totalItems={totalItems} />
+  //   </div>
+  // );
+
+  /*
+  Product Details
   return (
     <ProductDetail
       items={items}
@@ -68,4 +78,6 @@ export default function App() {
       currentProduct={mockItem}
     />
   );
+
+  */
 }

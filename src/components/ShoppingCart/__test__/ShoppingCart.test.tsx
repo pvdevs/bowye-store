@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 const MockSingleProduct: Product[] = [
   {
-    cover: '',
+    image: '',
     title: 'MockTitle',
     id: 2,
     category: 'MockCategory',
@@ -23,7 +23,7 @@ const MockSingleProduct: Product[] = [
 
 const MockMultipleProducts: Product[] = [
   {
-    cover: '',
+    image: '',
     title: 'MockTitle',
     id: 2,
     category: 'MockCategory',
@@ -36,7 +36,7 @@ const MockMultipleProducts: Product[] = [
     quantity: 1,
   },
   {
-    cover: '',
+    image: '',
     title: 'MockTitle22',
     id: 30,
     category: 'MockCategory22',

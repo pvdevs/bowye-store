@@ -5,10 +5,9 @@ import ProductsList from '../ProductsList/ProductsList';
 export const ProductDetail = ({
   items,
   setItems,
-  totalItems,
   currentProduct,
 }: ProductsList) => {
-  const listHasProduct = items.find((item) => item.id === currentProduct.id);
+  const listHasProduct = items.find((item) => item.id === currentProduct?.id);
 
   const decrementQuantity = () => {
     setItems(

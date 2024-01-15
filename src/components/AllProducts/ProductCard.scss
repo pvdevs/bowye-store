@@ -2,11 +2,13 @@
   text-align: center;
   color: #1b1b1b;
   font-family: sans-serif;
-  font-size: 1.5rem;
-  padding: 12px;
-  display: grid;
-  grid-template-rows: 1fr auto;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
   gap: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
   box-sizing: border-box;
 
   img {
@@ -16,7 +18,15 @@
   }
 
   .product-card-infos {
-    div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    .product-card-infos-title {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .product-card-infos-bottom {
       display: flex;
       justify-content: space-between;
       font-size: 14px;

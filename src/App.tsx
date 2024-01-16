@@ -1,62 +1,56 @@
-import React from 'react';
+import React, { createContext, useEffect } from 'react';
 import './App.scss';
 import ShoppingCart from './components/ShoppingCart/ShoppingCart';
 import Product from './components/ProductsList/Product';
 import { useState } from 'react';
 import { ProductDetail } from './components/ProductDetail/ProductDetail';
 import { AllProducts } from './components/AllProducts/AllProducts';
+import { NavBar } from './components/NavBar';
+import { Route, Routes } from 'react-router-dom';
+import { Home } from './pages/Home';
+import { Shop } from './pages/Shop';
+import { ProductPage } from './pages/ProductPage';
 
 export default function App() {
-  const initialItemsMock: Product[] = [
-    {
-      cover: '',
-      title: 'MockTitle',
-      id: 2,
-      category: 'MockCategory',
-      description: 'blabla',
-      price: 20.5,
-      rating: {
-        rate: 4.1,
-        count: 200,
-      },
-      quantity: 4,
-    },
-    {
-      cover: '',
-      title: 'MockTitle22',
-      id: 30,
-      category: 'MockCategory22',
-      description: 'blabla22',
-      price: 40.5,
-      rating: {
-        rate: 4.6,
-        count: 300,
-      },
-      quantity: 1,
-    },
-  ];
+  const [cartItems, setCartItems] = useState<Product[]>([]);
+  const [products, setProducts] = useState([]);
+  const totalItems = cartItems.reduce((acc, cur) => acc + cur.quantity, 0);
 
-  const mockItem: Product = {
-    cover: '',
-    title: 'MockTitle',
-    id: 2,
-    category: 'MockCategory',
-    description: 'blabla',
-    price: 20.5,
-    rating: {
-      rate: 4.1,
-      count: 200,
-    },
-    quantity: 1,
-  };
+  useEffect(() => {
+    async function getData() {
+      const products = await fetch('https://fakestoreapi.com/products').then(
+        (response) => {
+          if (response.status >= 400) {
+            throw new Error('server error');
+          }
+          return response.json();
+        }
+      );
+      setProducts(products);
+    }
 
-  const [items, setItems] = useState<Product[]>(initialItemsMock);
-  const totalItems = items.reduce((acc, cur) => acc + cur.quantity, 0);
+    getData();
+  }, []);
 
   //All Products
   return (
-    <div className="shop">
-      <AllProducts />
+    <div className="content">
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="home" element={<Home />} />
+        <Route path="shop" element={<Shop />} />
+        <Route
+          path="shop/:productId"
+          element={
+            <ProductPage
+              products={products}
+              items={cartItems}
+              setItems={setCartItems}
+            />
+          }
+        />
+      </Routes>
     </div>
   );
 

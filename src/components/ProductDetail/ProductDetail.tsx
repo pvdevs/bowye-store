@@ -6,8 +6,9 @@ export const ProductDetail = ({
   items,
   setItems,
   currentProduct,
+  currentProductId,
 }: ProductsList) => {
-  const listHasProduct = items.find((item) => item.id === currentProduct?.id);
+  const listHasProduct = items.find((item) => item.id === currentProductId);
 
   const decrementQuantity = () => {
     setItems(
@@ -52,19 +53,16 @@ export const ProductDetail = ({
 
   return (
     <div className="product-details">
-      <img src="aasf" alt="" />
+      <img src={currentProduct?.image} alt="" />
       <div className="product-details-infos">
         <div className="details-title-rate">
-          <h1>Bababa</h1>
-          <span>Rating 3.9 - 250 reviews</span>
+          <h1>{currentProduct?.title}</h1>
+          <span>
+            Rating {currentProduct?.rating.rate} -{' '}
+            {currentProduct?.rating.count} reviews
+          </span>
         </div>
-        <p>
-          Slim-fitting style, contrast raglan long sleeve, three-button henley
-          placket, light weight & soft fabric for breathable and comfortable
-          wearing. And Solid stitched shirts with round neck made for durability
-          and a great fit for casual fashion wear and diehard baseball fans. The
-          Henley style round neckline includes a three-button placket.
-        </p>
+        <p>{currentProduct?.description}</p>
         <span>{currentProduct?.category}</span>
         <div className="horizontal-line"></div>
         <div className="cta">

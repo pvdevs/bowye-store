@@ -7,12 +7,18 @@ export const NavBar = () => {
       <div className="logo">BADBAD</div>
 
       <ul className="nav-links">
-        <li>Home</li>
+        <li>
+          <Link to="home">Home</Link>
+        </li>
         <li>
           <Link to="shop">Shop</Link>
         </li>
-        <li>About Us</li>
-        <li>Cart</li>
+        <li>
+          <Link to="about">About</Link>
+        </li>
+        <li>
+          <Link to="cart">Cart</Link>
+        </li>
       </ul>
     </nav>
   );

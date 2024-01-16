@@ -8,6 +8,10 @@ export const ProductDetail = ({
   currentProduct,
   currentProductId,
 }: ProductsList) => {
+  if (!currentProduct) {
+    throw new Error('must contain a current product!');
+  }
+
   const listHasProduct = items.find((item) => item.id === currentProductId);
 
   const decrementQuantity = () => {
@@ -24,9 +28,11 @@ export const ProductDetail = ({
   };
 
   const incrementQuantity = () => {
-    setItems(
-      items.map((item) => {
+    setItems((prevItems) =>
+      prevItems.map((item) => {
         if (item.id === currentProduct?.id) {
+          console.log(currentProduct.quantity);
+
           return { ...item, quantity: item.quantity + 1 };
         } else {
           return item;
@@ -40,7 +46,11 @@ export const ProductDetail = ({
   ) => {
     e.preventDefault();
 
-    decrementQuantity();
+    if (listHasProduct?.quantity === 1) {
+      setItems(items.filter((item) => item.id !== listHasProduct.id));
+    } else {
+      decrementQuantity();
+    }
   };
 
   const handleIncrementBtn = (
@@ -49,6 +59,14 @@ export const ProductDetail = ({
     e.preventDefault();
 
     incrementQuantity();
+  };
+
+  const handleAddToCart = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+
+    setItems([...items, currentProduct]);
   };
 
   return (
@@ -78,7 +96,9 @@ export const ProductDetail = ({
               <button onClick={(e) => handleIncrementBtn(e)}>+</button>
             </div>
           ) : (
-            <button>Add to your cart - ${currentProduct?.price}</button>
+            <button onClick={(e) => handleAddToCart(e)}>
+              Add to your cart - ${currentProduct?.price}
+            </button>
           )}
         </div>
       </div>

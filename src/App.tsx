@@ -1,15 +1,14 @@
 import React, { createContext, useEffect } from 'react';
 import './App.scss';
-import ShoppingCart from './components/ShoppingCart/ShoppingCart';
 import Product from './components/ProductsList/Product';
 import { useState } from 'react';
-import { ProductDetail } from './components/ProductDetail/ProductDetail';
-import { AllProducts } from './components/AllProducts/AllProducts';
 import { NavBar } from './components/NavBar';
 import { Route, Routes } from 'react-router-dom';
 import { Home } from './pages/Home';
 import { Shop } from './pages/Shop';
 import { ProductPage } from './pages/ProductPage';
+import { About } from './pages/About';
+import { Cart } from './pages/Cart';
 
 export default function App() {
   const [cartItems, setCartItems] = useState<Product[]>([]);
@@ -26,7 +25,11 @@ export default function App() {
           return response.json();
         }
       );
-      setProducts(products);
+      const productsWithQuantity = products.map((product) => ({
+        ...product,
+        quantity: 1,
+      }));
+      setProducts(productsWithQuantity);
     }
 
     getData();
@@ -50,28 +53,18 @@ export default function App() {
             />
           }
         />
+        <Route path="about" element={<About />} />
+        <Route
+          path="cart"
+          element={
+            <Cart
+              items={cartItems}
+              setItems={setCartItems}
+              totalItems={totalItems}
+            />
+          }
+        />
       </Routes>
     </div>
   );
-
-  // //Shopping Cart
-
-  // return (
-  //   <div>
-  //     <ShoppingCart items={items} setItems={setItems} totalItems={totalItems} />
-  //   </div>
-  // );
-
-  /*
-  Product Details
-  return (
-    <ProductDetail
-      items={items}
-      setItems={setItems}
-      totalItems={totalItems}
-      currentProduct={mockItem}
-    />
-  );
-
-  */
 }

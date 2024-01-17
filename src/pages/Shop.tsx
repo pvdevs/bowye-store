@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './styles/Shop.scss';
 import { ProductCard } from '../components/AllProducts/ProductCard';
+import { useShopContext } from '../contexts/ShopContext';
 
-type Product = {
-  products: [];
-};
+export const Shop = () => {
+  const { products } = useShopContext();
 
-export const Shop = ({ products }: Product) => {
   return (
     <div className="shop-container">
       {products.map((product) => (

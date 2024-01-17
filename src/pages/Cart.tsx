@@ -1,5 +1,5 @@
 import './styles/Cart.scss';
-import { CartItem } from '../components/ShoppingCart/CartItem';
+import { CartItem } from '../components/CartItem/CartItem';
 import ProductsList from '../components/ProductsList/ProductsList';
 
 export const Cart = ({ items, setItems, totalItems }: ProductsList) => {

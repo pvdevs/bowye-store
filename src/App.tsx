@@ -1,4 +1,4 @@
-import React, { createContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import './App.scss';
 import Product from './components/ProductsList/Product';
 import { useState } from 'react';
@@ -9,6 +9,10 @@ import { Shop } from './pages/Shop';
 import { ProductPage } from './pages/ProductPage';
 import { About } from './pages/About';
 import { Cart } from './pages/Cart';
+
+type Children = {
+  children: React.ReactNode;
+};
 
 export default function App() {
   const [cartItems, setCartItems] = useState<Product[]>([]);
@@ -35,14 +39,15 @@ export default function App() {
     getData();
   }, []);
 
-  //All Products
+  //All Products                                        -> Products | cartItems - setCartItems - totalItems (may be just a regular function idk)
   return (
     <div className="content">
       <NavBar totalItems={totalItems} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="home" element={<Home />} />
-        <Route path="shop" element={<Shop products={products} />} />
+        <ThemeContextProvider>{children}:Children</ThemeContextProvider>
+        <Route path="shop" element={<Shop />} />
         <Route
           path="shop/:productId"
           element={

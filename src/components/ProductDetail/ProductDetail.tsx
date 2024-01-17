@@ -1,22 +1,29 @@
 import React from 'react';
-import './ProductDetail.scss';
-import ProductsList from '../ProductsList/ProductsList';
+import './styles/ProductDetail.scss';
+import ProductsList from '../Interfaces/ProductsList';
+import { useShopContext } from '../../contexts/ShopContext';
+import Product from '../Interfaces/Product';
+
+type ProductDetailProps = {
+  currentProduct: Product;
+  currentProductId: number;
+};
 
 export const ProductDetail = ({
-  items,
-  setItems,
   currentProduct,
   currentProductId,
-}: ProductsList) => {
+}: ProductDetailProps) => {
+  const { cartItems, setCartItems } = useShopContext();
+
   if (!currentProduct) {
-    throw new Error('must contain a current product!');
+    throw new Error('must contain a current product');
   }
 
-  const listHasProduct = items.find((item) => item.id === currentProductId);
+  const listHasProduct = cartItems.find((item) => item.id === currentProductId);
 
   const decrementQuantity = () => {
-    setItems(
-      items.map((item) => {
+    setCartItems(
+      cartItems.map((item) => {
         if (item.id === currentProduct?.id) {
           if (item.quantity === 1) return item;
           return { ...item, quantity: item.quantity - 1 };
@@ -28,7 +35,7 @@ export const ProductDetail = ({
   };
 
   const incrementQuantity = () => {
-    setItems((prevItems) =>
+    setCartItems((prevItems) =>
       prevItems.map((item) => {
         if (item.id === currentProduct?.id) {
           return { ...item, quantity: item.quantity + 1 };
@@ -45,7 +52,7 @@ export const ProductDetail = ({
     e.preventDefault();
 
     if (listHasProduct?.quantity === 1) {
-      setItems(items.filter((item) => item.id !== listHasProduct.id));
+      setCartItems(cartItems.filter((item) => item.id !== listHasProduct.id));
     } else {
       decrementQuantity();
     }
@@ -64,7 +71,7 @@ export const ProductDetail = ({
   ) => {
     e.preventDefault();
 
-    setItems([...items, currentProduct]);
+    setCartItems([...cartItems, currentProduct]);
   };
 
   return (

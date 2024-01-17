@@ -1,6 +1,6 @@
 //import React from 'react';
 import { useShopContext } from '../../contexts/ShopContext';
-import ProductsList from '../ProductsList/ProductsList';
+import ProductsList from '../Interfaces/ProductsList';
 
 export const CartItem = ({ currentProductId }: ProductsList) => {
   const { cartItems, setCartItems } = useShopContext();

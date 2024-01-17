@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import './App.scss';
-import Product from './components/ProductsList/Product';
+import Product from './components/Interfaces/Product';
 import { useState } from 'react';
 import { NavBar } from './components/NavBar';
 import { Route, Routes } from 'react-router-dom';

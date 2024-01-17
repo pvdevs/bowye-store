@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './styles/Shop.scss';
-import { ProductCard } from '../components/AllProducts/ProductCard';
+import { ProductCard } from '../components/ProductCard/ProductCard';
 import { useShopContext } from '../contexts/ShopContext';
 
 export const Shop = () => {

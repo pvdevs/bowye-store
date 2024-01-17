@@ -1,6 +1,6 @@
 import './styles/Cart.scss';
 import { CartItem } from '../components/CartItem/CartItem';
-import ProductsList from '../components/ProductsList/ProductsList';
+import ProductsList from '../components/Interfaces/ProductsList';
 import { useShopContext } from '../contexts/ShopContext';
 
 export const Cart = () => {

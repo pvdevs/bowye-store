@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { expect, describe, it } from 'vitest';
 import { userEvent } from '@testing-library/user-event';
-import Product from '../../ProductsList/Product';
+import Product from '../../Interfaces/Product';
 import { useState } from 'react';
 import { ProductDetail } from '../ProductDetail';
 

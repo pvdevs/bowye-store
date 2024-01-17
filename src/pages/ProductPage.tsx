@@ -1,11 +1,9 @@
-import React from 'react';
 import { useParams } from 'react-router-dom';
 import { ProductDetail } from '../components/ProductDetail/ProductDetail';
-import ProductsList from '../components/ProductsList/ProductsList';
 import { useShopContext } from '../contexts/ShopContext';
 
 export const ProductPage = () => {
-  const { products, cartItems, setCartItems } = useShopContext();
+  const { products } = useShopContext();
   const { productId } = useParams();
 
   if (!productId) {
@@ -16,11 +14,13 @@ export const ProductPage = () => {
     (product) => product.id === parseInt(productId)
   );
 
+  if (!currentProduct) {
+    throw new Error('Current product id not found');
+  }
+
   return (
     <>
       <ProductDetail
-        items={cartItems}
-        setItems={setCartItems}
         currentProduct={currentProduct}
         currentProductId={parseInt(productId)}
       />

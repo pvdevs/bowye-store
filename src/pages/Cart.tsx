@@ -1,11 +1,13 @@
 import './styles/Cart.scss';
 import { CartItem } from '../components/CartItem/CartItem';
 import ProductsList from '../components/ProductsList/ProductsList';
+import { useShopContext } from '../contexts/ShopContext';
 
-export const Cart = ({ items, setItems, totalItems }: ProductsList) => {
+export const Cart = () => {
   //
+  const { cartItems, totalItems } = useShopContext();
 
-  const totalCost = items.reduce(
+  const totalCost = cartItems.reduce(
     (acc, curr) => acc + curr.quantity * curr.price,
     0
   );
@@ -35,15 +37,8 @@ export const Cart = ({ items, setItems, totalItems }: ProductsList) => {
           </tr>
         </thead>
         <tbody>
-          {items.map((item) => {
-            return (
-              <CartItem
-                items={items}
-                setItems={setItems}
-                currentProductId={item.id}
-                key={item.id}
-              />
-            );
+          {cartItems.map((item) => {
+            return <CartItem currentProductId={item.id} key={item.id} />;
           })}
         </tbody>
       </table>

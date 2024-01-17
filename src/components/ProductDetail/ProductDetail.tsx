@@ -31,8 +31,6 @@ export const ProductDetail = ({
     setItems((prevItems) =>
       prevItems.map((item) => {
         if (item.id === currentProduct?.id) {
-          console.log(currentProduct.quantity);
-
           return { ...item, quantity: item.quantity + 1 };
         } else {
           return item;

@@ -9,10 +9,7 @@ import { Shop } from './pages/Shop';
 import { ProductPage } from './pages/ProductPage';
 import { About } from './pages/About';
 import { Cart } from './pages/Cart';
-
-type Children = {
-  children: React.ReactNode;
-};
+import { ShopContext } from './contexts/ShopContext';
 
 export default function App() {
   const [cartItems, setCartItems] = useState<Product[]>([]);
@@ -39,37 +36,21 @@ export default function App() {
     getData();
   }, []);
 
-  //All Products                                        -> Products | cartItems - setCartItems - totalItems (may be just a regular function idk)
   return (
     <div className="content">
-      <NavBar totalItems={totalItems} />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="home" element={<Home />} />
-        <ThemeContextProvider>{children}:Children</ThemeContextProvider>
-        <Route path="shop" element={<Shop />} />
-        <Route
-          path="shop/:productId"
-          element={
-            <ProductPage
-              products={products}
-              items={cartItems}
-              setItems={setCartItems}
-            />
-          }
-        />
-        <Route path="about" element={<About />} />
-        <Route
-          path="cart"
-          element={
-            <Cart
-              items={cartItems}
-              setItems={setCartItems}
-              totalItems={totalItems}
-            />
-          }
-        />
-      </Routes>
+      <ShopContext.Provider
+        value={{ cartItems, setCartItems, products, totalItems }}
+      >
+        <NavBar totalItems={totalItems} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="home" element={<Home />} />
+          <Route path="shop" element={<Shop />} />
+          <Route path="shop/:productId" element={<ProductPage />} />
+          <Route path="about" element={<About />} />
+          <Route path="cart" element={<Cart />} />
+        </Routes>
+      </ShopContext.Provider>
     </div>
   );
 }

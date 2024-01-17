@@ -1,16 +1,15 @@
 //import React from 'react';
+import { useShopContext } from '../../contexts/ShopContext';
 import ProductsList from '../ProductsList/ProductsList';
 
-export const CartItem = ({
-  items,
-  setItems,
-  currentProductId,
-}: ProductsList) => {
-  const currentProduct = items.find((item) => item.id === currentProductId);
+export const CartItem = ({ currentProductId }: ProductsList) => {
+  const { cartItems, setCartItems } = useShopContext();
+
+  const currentProduct = cartItems.find((item) => item.id === currentProductId);
 
   const decrementQuantity = () => {
-    setItems(
-      items.map((item) => {
+    setCartItems(
+      cartItems.map((item) => {
         if (item.id === currentProductId) {
           if (item.quantity === 1) return item;
           return { ...item, quantity: item.quantity - 1 };
@@ -22,8 +21,8 @@ export const CartItem = ({
   };
 
   const incrementQuantity = () => {
-    setItems(
-      items.map((item) => {
+    setCartItems(
+      cartItems.map((item) => {
         if (item.id === currentProductId) {
           return { ...item, quantity: item.quantity + 1 };
         } else {
@@ -54,7 +53,7 @@ export const CartItem = ({
   ) => {
     e.preventDefault();
 
-    setItems(items.filter((item) => item.id !== currentProductId));
+    setCartItems(cartItems.filter((item) => item.id !== currentProductId));
   };
 
   if (!currentProduct) {

@@ -16,11 +16,11 @@ export const NavBar = ({ totalItems }: TotalItems) => {
   return (
     <nav className="navbar">
       <div className="logo">BADBAD</div>
-      <a href="#" className="toggle-button" onClick={handleToggleButton}>
+      <div className="toggle-button" onClick={handleToggleButton}>
         <span className="bar"></span>
         <span className="bar"></span>
         <span className="bar"></span>
-      </a>
+      </div>
       <div className={`navbar-links ${mobileNavActive ? 'mobile-show' : ''}`}>
         <ul>
           <CustomLink to={'home'}>HOME</CustomLink>

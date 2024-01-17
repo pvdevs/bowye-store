@@ -1,0 +1,26 @@
+.back-btn {
+  position: relative;
+  font-size: 18px;
+  color: #252525;
+  border: none;
+  background: none;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.back-btn:after {
+  content: '';
+  position: absolute;
+  background-color: #181818;
+  height: 2px;
+  width: 0;
+  right: 0;
+  bottom: -8px;
+  transition: 0.3s;
+}
+
+.back-btn:hover:after {
+  width: 100%;
+}

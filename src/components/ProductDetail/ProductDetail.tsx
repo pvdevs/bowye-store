@@ -4,7 +4,7 @@ import ProductsList from '../Interfaces/ProductsList';
 import { useShopContext } from '../../contexts/ShopContext';
 import Product from '../Interfaces/Product';
 import { useNavigate } from 'react-router-dom';
-import { BackButton } from '../BackButton';
+import { BackButton } from '../BackButton/BackButton';
 
 type ProductDetailProps = {
   currentProduct: Product;
@@ -78,7 +78,7 @@ export const ProductDetail = ({
 
   return (
     <div className="page">
-      <BackButton buttonContent="Return Shopping" />
+      <BackButton />
 
       <div className="product-details">
         <div

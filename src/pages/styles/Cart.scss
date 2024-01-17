@@ -97,3 +97,22 @@ table {
   gap: 24px;
   align-self: center;
 }
+
+@media (max-width: 800px) {
+  thead {
+    th {
+      display: none;
+    }
+
+    tr {
+      display: grid;
+      grid-template-columns: 30% 1fr auto;
+      grid-template-rows: repeat(4, 1fr);
+      grid-template-areas:
+        ' img title uprice '
+        ' img category tprice'
+        ' img remove  remove'
+        ' img qty qty';
+    }
+  }
+}

@@ -65,12 +65,17 @@ export const CartItem = ({
     <tr className="cart-item-row">
       <td>
         <div className="product-details-cart">
-          <img src={currentProduct.title} alt="" />
+          <img src={currentProduct.image} alt="" />
 
           <div>
             <span>{currentProduct.title}</span>
             <span>{currentProduct.title}</span>
-            <button onClick={(e) => handleRemoveBtn(e)}>Remove</button>
+            <button
+              onClick={(e) => handleRemoveBtn(e)}
+              className="secondary-button"
+            >
+              Remove
+            </button>
           </div>
         </div>
       </td>

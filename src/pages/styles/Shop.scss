@@ -1,0 +1,13 @@
+.shop {
+  width: 100%;
+}
+
+.shop-container {
+  display: grid;
+  width: 100%;
+  padding: 0 48px;
+  box-sizing: border-box;
+  grid-template-rows: auto;
+  grid-template-columns: repeat(auto-fit, minmax(248px, 1fr));
+  gap: 48px 32px;
+}

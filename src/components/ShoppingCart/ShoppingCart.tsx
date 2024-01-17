@@ -62,6 +62,8 @@ export default function ShoppingCart({
         >
           TOTAL COST: {totalCost}
         </span>
+
+        <button className="cta-button">Checkout</button>
       </div>
     </div>
   );

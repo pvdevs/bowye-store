@@ -38,11 +38,11 @@ export default function App() {
   //All Products
   return (
     <div className="content">
-      <NavBar />
+      <NavBar totalItems={totalItems} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="home" element={<Home />} />
-        <Route path="shop" element={<Shop />} />
+        <Route path="shop" element={<Shop products={products} />} />
         <Route
           path="shop/:productId"
           element={

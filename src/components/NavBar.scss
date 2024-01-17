@@ -1,0 +1,35 @@
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  padding: 48px;
+  color: #666666;
+
+  .nav-links {
+    display: flex;
+    gap: 80px;
+
+    ul,
+    li {
+      list-style: none;
+    }
+  }
+
+  a {
+    color: inherit;
+    transition: 0.4s;
+  }
+
+  a:hover {
+    color: #141414;
+    text-decoration: underline;
+    font-weight: 700;
+  }
+}
+
+.active {
+  a {
+    color: #141414;
+    text-decoration: underline;
+    font-weight: 700;
+  }
+}

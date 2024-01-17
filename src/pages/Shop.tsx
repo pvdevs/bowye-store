@@ -1,10 +1,17 @@
-import React from 'react';
-import { AllProducts } from '../components/AllProducts/AllProducts';
+import React, { useEffect, useState } from 'react';
+import './styles/Shop.scss';
+import { ProductCard } from '../components/AllProducts/ProductCard';
 
-export const Shop = () => {
+type Product = {
+  products: [];
+};
+
+export const Shop = ({ products }: Product) => {
   return (
-    <>
-      <AllProducts />
-    </>
+    <div className="shop-container">
+      {products.map((product) => (
+        <ProductCard product={product} key={product.id} />
+      ))}
+    </div>
   );
 };

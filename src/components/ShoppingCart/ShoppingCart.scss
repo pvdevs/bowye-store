@@ -35,6 +35,7 @@ table {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  padding: 24px 48px;
 }
 
 .return-button {
@@ -90,18 +91,9 @@ table {
   justify-content: center;
 }
 
-.minus-plus-button-container {
+.order-summary {
   display: flex;
-  gap: 8px;
-  align-items: center;
-  border: 1px solid #000000;
-  border-radius: 4px;
-
-  .decrement-button,
-  .increment-button {
-    border: none;
-    padding: 8px 16px;
-    background: none;
-    font-weight: 600;
-  }
+  flex-direction: column;
+  gap: 24px;
+  align-self: center;
 }

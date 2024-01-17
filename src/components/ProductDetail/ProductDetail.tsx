@@ -86,17 +86,17 @@ export const ProductDetail = ({
         <div className="cta">
           {listHasProduct ? (
             <div
-              className="minus-plus-buttons"
+              className="minus-plus-button-container"
               data-testid="mock-minusplus-field"
             >
               <button onClick={(e) => handleDecrementBtn(e)}>-</button>
-              <span data-testid="mock-product-quantity">
+              <div data-testid="mock-product-quantity">
                 {listHasProduct.quantity}
-              </span>
+              </div>
               <button onClick={(e) => handleIncrementBtn(e)}>+</button>
             </div>
           ) : (
-            <button onClick={(e) => handleAddToCart(e)}>
+            <button onClick={(e) => handleAddToCart(e)} className="cta-button">
               Add to your cart - ${currentProduct?.price}
             </button>
           )}

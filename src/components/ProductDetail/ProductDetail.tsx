@@ -3,6 +3,8 @@ import './styles/ProductDetail.scss';
 import ProductsList from '../Interfaces/ProductsList';
 import { useShopContext } from '../../contexts/ShopContext';
 import Product from '../Interfaces/Product';
+import { useNavigate } from 'react-router-dom';
+import { BackButton } from '../BackButton';
 
 type ProductDetailProps = {
   currentProduct: Product;
@@ -75,36 +77,46 @@ export const ProductDetail = ({
   };
 
   return (
-    <div className="product-details">
-      <img src={currentProduct?.image} alt="" />
-      <div className="product-details-infos">
-        <div className="details-title-rate">
-          <h1>{currentProduct?.title}</h1>
-          <span>
-            Rating {currentProduct?.rating.rate} -{' '}
-            {currentProduct?.rating.count} reviews
-          </span>
-        </div>
-        <p>{currentProduct?.description}</p>
-        <span>{currentProduct?.category}</span>
-        <div className="horizontal-line"></div>
-        <div className="cta">
-          {listHasProduct ? (
-            <div
-              className="minus-plus-button-container"
-              data-testid="mock-minusplus-field"
-            >
-              <button onClick={(e) => handleDecrementBtn(e)}>-</button>
-              <div data-testid="mock-product-quantity">
-                {listHasProduct.quantity}
+    <div className="page">
+      <BackButton buttonContent="Return Shopping" />
+
+      <div className="product-details">
+        <div
+          className="product-details-image"
+          style={{ backgroundImage: `url(${currentProduct.image})` }}
+        ></div>
+        <div className="product-details-infos">
+          <div className="details-title-rate">
+            <h1>{currentProduct?.title}</h1>
+            <span>
+              Rating {currentProduct?.rating.rate} -{' '}
+              {currentProduct?.rating.count} reviews
+            </span>
+          </div>
+          <p>{currentProduct?.description}</p>
+          <span>{currentProduct?.category}</span>
+          <div className="horizontal-line"></div>
+          <div className="cta">
+            {listHasProduct ? (
+              <div
+                className="minus-plus-button-container"
+                data-testid="mock-minusplus-field"
+              >
+                <button onClick={(e) => handleDecrementBtn(e)}>-</button>
+                <div data-testid="mock-product-quantity">
+                  {listHasProduct.quantity}
+                </div>
+                <button onClick={(e) => handleIncrementBtn(e)}>+</button>
               </div>
-              <button onClick={(e) => handleIncrementBtn(e)}>+</button>
-            </div>
-          ) : (
-            <button onClick={(e) => handleAddToCart(e)} className="cta-button">
-              Add to your cart - ${currentProduct?.price}
-            </button>
-          )}
+            ) : (
+              <button
+                onClick={(e) => handleAddToCart(e)}
+                className="cta-button"
+              >
+                Add to your cart - ${currentProduct?.price}
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>

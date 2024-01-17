@@ -1,18 +1,9 @@
-.nav-bar {
+.navbar {
   display: flex;
   justify-content: space-between;
   padding: 48px;
   color: #666666;
-
-  .nav-links {
-    display: flex;
-    gap: 80px;
-
-    ul,
-    li {
-      list-style: none;
-    }
-  }
+  gap: 16px;
 
   a {
     color: inherit;
@@ -25,11 +16,77 @@
     font-weight: 700;
   }
 }
+.navbar-links {
+  height: 100%;
+
+  ul {
+    display: flex;
+    gap: 80px;
+  }
+
+  ul,
+  li {
+    list-style: none;
+  }
+}
 
 .active {
   a {
     color: #141414;
     text-decoration: underline;
     font-weight: 700;
+  }
+}
+
+.toggle-button {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 16px;
+}
+
+.toggle-button .bar {
+  height: 3px;
+  width: 100%;
+  background-color: #141414;
+  border-radius: 10px;
+}
+
+@media (max-width: 800px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px;
+  }
+
+  .toggle-button {
+    display: flex;
+  }
+
+  .navbar-links {
+    display: none;
+    width: 100%;
+  }
+
+  .navbar-links ul {
+    width: 100%;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .navbar-links ul li {
+    text-align: center;
+  }
+
+  .navbar-links ul li a {
+    padding: 0.5rem 1rem;
+  }
+
+  .navbar-links.mobile-show {
+    display: flex;
   }
 }

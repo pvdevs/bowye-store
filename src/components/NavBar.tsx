@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation, useMatch, useResolvedPath } from 'react-router-dom';
 import './NavBar.scss';
 
@@ -7,16 +7,27 @@ type TotalItems = {
 };
 
 export const NavBar = ({ totalItems }: TotalItems) => {
-  const location = useLocation();
-  return (
-    <nav className="nav-bar">
-      <div className="logo">BADBAD</div>
+  const [mobileNavActive, setMobileNavActive] = useState(false);
 
-      <ul className="nav-links">
-        <CustomLink to={'home'}>HOME</CustomLink>
-        <CustomLink to={'shop'}>SHOP</CustomLink>
-        <CustomLink to={'cart'}>CART({totalItems})</CustomLink>
-      </ul>
+  const handleToggleButton = () => {
+    setMobileNavActive((prev) => !prev);
+  };
+
+  return (
+    <nav className="navbar">
+      <div className="logo">BADBAD</div>
+      <a href="#" className="toggle-button" onClick={handleToggleButton}>
+        <span className="bar"></span>
+        <span className="bar"></span>
+        <span className="bar"></span>
+      </a>
+      <div className={`navbar-links ${mobileNavActive ? 'mobile-show' : ''}`}>
+        <ul>
+          <CustomLink to={'home'}>HOME</CustomLink>
+          <CustomLink to={'shop'}>SHOP</CustomLink>
+          <CustomLink to={'cart'}>CART({totalItems})</CustomLink>
+        </ul>
+      </div>
     </nav>
   );
 };

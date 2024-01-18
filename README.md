@@ -7,5 +7,9 @@
 - React
 - Typescript
 - SASS
-- Vitest
 - React Router
+
+## Testing
+- Vitest / Jest
+- React Testing Library
+- JSDOM

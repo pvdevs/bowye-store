@@ -9,20 +9,32 @@ type TotalItems = {
 export const NavBar = ({ totalItems }: TotalItems) => {
   const [mobileNavActive, setMobileNavActive] = useState(false);
 
+  const handleLinkButton = () => {
+    if (mobileNavActive === false) {
+      return;
+    }
+    setMobileNavActive(() => false);
+  };
+
   const handleToggleButton = () => {
     setMobileNavActive((prev) => !prev);
   };
 
   return (
     <nav className="navbar">
-      <div className="logo">BADBAD</div>
+      <div className="logo">
+        <Link to={'home'}>
+          <img src="../../../assets/Logo.svg"></img>
+        </Link>
+      </div>
+
       <div className="toggle-button" onClick={handleToggleButton}>
         <span className="bar"></span>
         <span className="bar"></span>
         <span className="bar"></span>
       </div>
       <div className={`navbar-links ${mobileNavActive ? 'mobile-show' : ''}`}>
-        <ul>
+        <ul onClick={handleLinkButton}>
           <CustomLink to={'home'}>HOME</CustomLink>
           <CustomLink to={'shop'}>SHOP</CustomLink>
           <CustomLink to={'cart'}>CART({totalItems})</CustomLink>
@@ -37,7 +49,7 @@ function CustomLink({ to, children, ...props }) {
   const isActive = useMatch({ path: resolvedPath.pathname, end: true });
 
   return (
-    <li className={isActive ? 'active' : ''}>
+    <li className={isActive ? 'active' : ''} style={{ listStyle: 'none' }}>
       <Link to={to} {...props}>
         {children}
       </Link>

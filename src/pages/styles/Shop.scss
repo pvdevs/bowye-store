@@ -10,4 +10,14 @@
   grid-template-rows: auto;
   grid-template-columns: repeat(auto-fit, minmax(248px, 1fr));
   gap: 48px 32px;
+
+  .product-card-infos {
+    text-align: start;
+  }
+}
+
+@media (max-width: 800px) {
+  .shop-container {
+    gap: 24px;
+  }
 }

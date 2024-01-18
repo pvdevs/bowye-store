@@ -6,6 +6,12 @@
   gap: 16px;
   position: relative;
 
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   a {
     color: inherit;
 
@@ -26,7 +32,7 @@
     height: 2px;
     width: 0;
     right: 0;
-    bottom: -8px;
+    bottom: -10px;
     transition: 0.3s;
   }
 
@@ -61,7 +67,7 @@
     height: 2px;
     width: 100%;
     right: 0;
-    bottom: -8px;
+    bottom: -10px;
     transition: 0.3s;
   }
 }
@@ -75,6 +81,7 @@
   justify-content: space-between;
   width: 24px;
   height: 16px;
+  transition: 0.3s linear;
 }
 
 .toggle-button .bar {
@@ -90,6 +97,19 @@
     align-items: flex-start;
     padding: 24px;
 
+    a {
+      font-size: 14px;
+    }
+
+    a:after {
+      content: '';
+      position: absolute;
+      background-color: #181818;
+      height: 2px;
+      width: 0%;
+      right: 0;
+      bottom: -4px;
+    }
     .active {
       a {
         color: #141414;
@@ -114,6 +134,7 @@
   }
 
   .navbar-links {
+    padding-top: 24px;
     display: none;
     width: 100%;
   }

@@ -1,4 +1,5 @@
 //import React from 'react';
+import { Link } from 'react-router-dom';
 import { useShopContext } from '../../contexts/ShopContext';
 import ProductsList from '../Interfaces/ProductsList';
 import './styles/CartItem.scss';
@@ -65,7 +66,9 @@ export const CartItem = ({ currentProductId }: ProductsList) => {
     <>
       <div className="cart-item-card">
         <div className="cart-item-card-image">
-          <img src={currentProduct.image} alt="" />
+          <Link to={`shop/${currentProduct.id}`}>
+            <img src={currentProduct.image} alt="" />
+          </Link>
         </div>
         <div className="cart-item-infos">
           <span className="cart-item-title">{currentProduct.title}</span>

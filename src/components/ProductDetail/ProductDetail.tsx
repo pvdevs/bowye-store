@@ -94,7 +94,9 @@ export const ProductDetail = ({
             </span>
           </div>
           <p>{currentProduct?.description}</p>
-          <span>{currentProduct?.category}</span>
+          <span className="product-detail-category">
+            {currentProduct?.category}
+          </span>
           <div className="horizontal-line"></div>
           <div className="cta">
             {listHasProduct ? (

@@ -102,11 +102,21 @@ export const ProductDetail = ({
                 className="minus-plus-button-container"
                 data-testid="mock-minusplus-field"
               >
-                <button onClick={(e) => handleDecrementBtn(e)}>-</button>
+                <button
+                  onClick={(e) => handleDecrementBtn(e)}
+                  className="decrement-button"
+                >
+                  -
+                </button>
                 <div data-testid="mock-product-quantity">
                   {listHasProduct.quantity}
                 </div>
-                <button onClick={(e) => handleIncrementBtn(e)}>+</button>
+                <button
+                  onClick={(e) => handleIncrementBtn(e)}
+                  className="increment-button"
+                >
+                  +
+                </button>
               </div>
             ) : (
               <button

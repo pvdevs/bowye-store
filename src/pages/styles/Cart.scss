@@ -1,51 +1,13 @@
-table {
-  table-layout: fixed;
-  width: 100%;
-  border-collapse: collapse;
-
-  thead th {
-    color: rgba($color: #000000, $alpha: 0.5);
-    font-weight: 600;
-  }
-
-  thead th:nth-child(1) {
-    width: 60%;
-    text-align: start;
-  }
-
-  thead th:nth-child(2) {
-    width: 20%;
-  }
-
-  thead th:nth-child(3) {
-    width: 10%;
-  }
-
-  thead th:nth-child(4) {
-    width: 10%;
-  }
-
-  th,
-  td {
-    padding: 16px;
-  }
-}
-
 .shopping-cart {
   display: flex;
   flex-direction: column;
   gap: 24px;
   padding: 24px 48px;
-}
-
-.return-button {
-  align-self: start;
-  font-size: 18px;
-  background: none;
-  border: none;
+  align-items: start;
 }
 
 .shopping-cart-top {
+  width: 100%;
   display: flex;
   justify-content: space-between;
 
@@ -55,64 +17,51 @@ table {
   }
 }
 
-.product-details-cart {
-  display: flex;
-  align-items: start;
-  gap: 32px;
-  height: 112px;
+.all-cart-items {
+  display: grid;
+  width: 100%;
 
-  img {
-    width: 112px;
-    height: 112px;
-  }
-
-  div {
-    height: 100%;
-    display: grid;
-    justify-items: start;
-    grid-template-rows: auto auto 1fr;
-    justify-content: space-between;
-    font-size: 14px;
-    color: rgba($color: #000000, $alpha: 0.7);
-
-    span:first-of-type {
-      font-weight: 600;
-      color: rgba($color: #000000, $alpha: 0.9);
-    }
-
-    button {
-      grid-row: -1;
-    }
-  }
-}
-
-.quantity-table {
-  display: flex;
-  justify-content: center;
+  box-sizing: border-box;
+  grid-template-rows: auto;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 304px));
+  gap: 32px 24px;
 }
 
 .order-summary {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba($color: #ffffff, $alpha: 0.7);
   display: flex;
-  flex-direction: column;
   gap: 24px;
-  align-self: center;
+  align-items: center;
+  justify-content: end;
+  border-top: 1px solid #333333;
+
+  button {
+    padding: 32px 48px;
+  }
 }
 
 @media (max-width: 800px) {
-  thead {
-    th {
-      display: none;
+  .shopping-cart-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    h1 {
+      font-size: 24px;
     }
 
-    tr {
-      display: grid;
-      grid-template-columns: 30% 1fr auto;
-      grid-template-rows: repeat(4, 1fr);
-      grid-template-areas:
-        ' img title uprice '
-        ' img category tprice'
-        ' img remove  remove'
-        ' img qty qty';
+    .cart-items-counter {
+      font-size: 16px;
+      font-weight: 400;
+    }
+  }
+
+  .order-summary {
+    background-color: rgba($color: #ffffff, $alpha: 0.9);
+    button {
+      padding: 24px 40px;
     }
   }
 }

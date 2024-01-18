@@ -1,6 +1,7 @@
 //import React from 'react';
 import { useShopContext } from '../../contexts/ShopContext';
 import ProductsList from '../Interfaces/ProductsList';
+import './styles/CartItem.scss';
 
 export const CartItem = ({ currentProductId }: ProductsList) => {
   const { cartItems, setCartItems } = useShopContext();
@@ -61,25 +62,19 @@ export const CartItem = ({ currentProductId }: ProductsList) => {
   }
 
   return (
-    <tr className="cart-item-row">
-      <td>
-        <div className="product-details-cart">
+    <>
+      <div className="cart-item-card">
+        <div className="cart-item-card-image">
           <img src={currentProduct.image} alt="" />
-
-          <div>
-            <span>{currentProduct.title}</span>
-            <span>{currentProduct.title}</span>
-            <button
-              onClick={(e) => handleRemoveBtn(e)}
-              className="secondary-button"
-            >
-              Remove
-            </button>
-          </div>
         </div>
-      </td>
-      <td>
-        <div className="quantity-table">
+        <div className="cart-item-infos">
+          <span className="cart-item-title">{currentProduct.title}</span>
+          <span className="cart-item-category">{currentProduct.category}</span>
+          <span className="cart-item-price">
+            ${currentProduct.price * currentProduct.quantity}
+          </span>
+        </div>
+        <div className="cart-item-buttons">
           <div className="minus-plus-button-container">
             <button
               className="decrement-button"
@@ -101,16 +96,14 @@ export const CartItem = ({ currentProductId }: ProductsList) => {
               +
             </button>
           </div>
+          <button
+            onClick={(e) => handleRemoveBtn(e)}
+            className="secondary-button"
+          >
+            Remove
+          </button>
         </div>
-      </td>
-      <td>
-        <span>{currentProduct.price}</span>
-      </td>
-      <td>
-        <span data-testid="mock-item-total-price">
-          {currentProduct.price * currentProduct.quantity}
-        </span>
-      </td>
-    </tr>
+      </div>
+    </>
   );
 };

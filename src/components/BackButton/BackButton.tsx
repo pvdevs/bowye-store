@@ -9,7 +9,7 @@ export const BackButton = () => {
   return (
     <div className="back-button-container">
       <button onClick={goBack} className="back-btn">
-        <img src="../../../assets/return-icon.svg" alt="" />
+        <img src="/assets/return-icon.svg" alt="" />
         Back
       </button>
       <div className="underline"></div>

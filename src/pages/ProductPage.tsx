@@ -1,3 +1,4 @@
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { ProductDetail } from '../components/ProductDetail/ProductDetail';
 import { useShopContext } from '../contexts/ShopContext';
@@ -10,7 +11,11 @@ export const ProductPage = () => {
     throw new Error('Must contain a product id!');
   }
 
-  const currentProduct = products?.find(
+  if (!products || products.length === 0) {
+    return <div>Loading...</div>;
+  }
+
+  const currentProduct = products.find(
     (product) => product.id === parseInt(productId)
   );
 

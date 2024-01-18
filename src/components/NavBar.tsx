@@ -24,7 +24,7 @@ export const NavBar = ({ totalItems }: TotalItems) => {
     <nav className="navbar">
       <div className="logo">
         <Link to={'home'}>
-          <img src="../../../assets/Logo.svg"></img>
+          <img src="/assets/Logo.svg"></img>
         </Link>
       </div>
 

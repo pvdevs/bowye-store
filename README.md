@@ -13,3 +13,6 @@
 - Vitest / Jest
 - React Testing Library
 - JSDOM
+
+### Responsive
+![image](https://github.com/pvdevs/bowye-store/assets/128150302/d9ac8951-a5de-4719-bbbb-8fd4d783fa77)
